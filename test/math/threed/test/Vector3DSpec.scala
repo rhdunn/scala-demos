@@ -101,4 +101,12 @@ class Vector3DSpec extends FlatSpec {
     approx(new Vector3D( 3.0, -4.0,  5.0).norm, 7.0710678118654755)
     approx(new Vector3D( 3.0,  4.0, -5.0).norm, 7.0710678118654755)
   }
+
+  "unit" should "calculate the unit vector" in {
+    val u = new Vector3D(3, 6, 9).unit
+    approx(u.x, 0.2672612419124244)
+    approx(u.y, 0.5345224838248488)
+    approx(u.z, 0.8017837257372732)
+    assert(u.norm == 1.0)
+  }
 }
