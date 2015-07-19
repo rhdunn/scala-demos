@@ -51,6 +51,12 @@ class Vector3D(a: Double, b: Double, c: Double) {
   // dot product
   def ∙(other: Vector3D) =
     this.x*other.x + this.y*other.y + this.z*other.z
+
+  // cross product
+  def ×(other: Vector3D) =
+    new Vector3D(this.y*other.z - this.z*other.y,
+                 this.z*other.x - this.x*other.z,
+                 this.x*other.y - this.y*other.x)
 }
 
 object Vector3D {

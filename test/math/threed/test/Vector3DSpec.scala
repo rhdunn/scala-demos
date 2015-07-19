@@ -116,4 +116,14 @@ class Vector3DSpec extends FlatSpec {
     assert(a∙b == 60)
     assert(b∙a == 60)
   }
+
+  "cross product" should "be the vector product of two vectors" in {
+    val a = new Vector3D(4, 2, 1)
+    val b = new Vector3D(3, 6, 9)
+    val c = new Vector3D(1, 2, 3)
+    assert(a×b == new Vector3D( 12, -33,  18))
+    assert(b×a == new Vector3D(-12,  33, -18))
+    assert(b×c == new Vector3D())
+    assert(c×b == new Vector3D())
+  }
 }
