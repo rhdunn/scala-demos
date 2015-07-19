@@ -24,4 +24,6 @@ class Vector3D(a: Double, b: Double, c: Double) {
   def x = a
   def y = b
   def z = c
+
+  def norm = Math.sqrt(x*x + y*y + z*z)
 }
