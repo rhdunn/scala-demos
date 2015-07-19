@@ -21,6 +21,8 @@
 package math.threed
 
 class Vector3D(a: Double, b: Double, c: Double) {
+  def this() = this(0, 0, 0)
+
   def x = a
   def y = b
   def z = c

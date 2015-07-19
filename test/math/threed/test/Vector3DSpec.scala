@@ -34,6 +34,13 @@ class Vector3DSpec extends FlatSpec {
     assert(v.z == -5.6)
   }
 
+  "Null vector initialization" should "initialize x, y and z with zeros" in {
+    val v = new Vector3D()
+    assert(v.x == 0)
+    assert(v.y == 0)
+    assert(v.z == 0)
+  }
+
   "norm" should "calculate the magnitude of the vector" in {
     approx(new Vector3D( 3.0,  4.0,  5.0).norm, 7.0710678118654755)
     approx(new Vector3D(-3.0,  4.0,  5.0).norm, 7.0710678118654755)
