@@ -86,6 +86,11 @@ class Vector3DSpec extends FlatSpec {
     assert(v - v == new Vector3D())
   }
 
+  "scalar multiplication" should "scale the vector" in {
+    assert(new Vector3D(1, 2, 3) * 2 == new Vector3D(2,  4,  6))
+    assert(2 * new Vector3D(1, 2, 3) == new Vector3D(2,  4,  6))
+  }
+
   "norm" should "calculate the magnitude of the vector" in {
     approx(new Vector3D( 3.0,  4.0,  5.0).norm, 7.0710678118654755)
     approx(new Vector3D(-3.0,  4.0,  5.0).norm, 7.0710678118654755)

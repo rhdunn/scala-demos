@@ -40,5 +40,15 @@ class Vector3D(a: Double, b: Double, c: Double) {
   def -(other: Vector3D) =
     new Vector3D(this.x - other.x, this.y - other.y, this.z - other.z)
 
+  def *(s: Double) = new Vector3D(x*s, y*s, z*s)
+
   def norm = Math.sqrt(x*x + y*y + z*z)
+}
+
+object Vector3D {
+  class Scalar(s: Double) {
+    def *(v: Vector3D) = v*s
+  }
+
+  implicit def doubleToScalar(s: Double) : Scalar = new Scalar(s)
 }
