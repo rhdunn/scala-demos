@@ -126,4 +126,28 @@ class Vector3DSpec extends FlatSpec {
     assert(b×c == new Vector3D())
     assert(c×b == new Vector3D())
   }
+
+  "angle" should "be 0 if the vectors are the same" in {
+    val a = new Vector3D(5.2, 3.7, 4.4)
+    val b = new Vector3D(5.2, 3.7, 4.4)
+    assert((a angle b) == 0.0)
+  }
+
+  "angle" should "calculate the angle between two vectors along the x-y plane" in {
+    val x_y = new Vector3D(Math.sqrt(3)/2, 0.5, 0)
+    val x   = new Vector3D(1, 0, 0)
+    approx(x angle x_y, Math.PI/6) // 30° = π/6 rad
+  }
+
+  "angle" should "calculate the angle between two vectors along the x-z plane" in {
+    val x_z = new Vector3D(Math.sqrt(3)/2, 0, 0.5)
+    val x   = new Vector3D(1, 0, 0)
+    approx(x angle x_z, Math.PI/6) // 30° = π/6 rad
+  }
+
+  "angle" should "calculate the angle between two vectors along the y-z plane" in {
+    val y_z = new Vector3D(0, Math.sqrt(3)/2, 0.5)
+    val y   = new Vector3D(0, 1, 0)
+    approx(y angle y_z, Math.PI/6) // 30° = π/6 rad
+  }
 }

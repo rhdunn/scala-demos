@@ -57,6 +57,15 @@ class Vector3D(a: Double, b: Double, c: Double) {
     new Vector3D(this.y*other.z - this.z*other.y,
                  this.z*other.x - this.x*other.z,
                  this.x*other.y - this.y*other.x)
+
+  // angle:
+  //    |a||b|cos θ = a∙b
+  // =>       cos θ = (a∙b)/(|a||b|)
+  // =>           θ = cos⁻¹ ((a∙b)/(|a||b|))
+  def angle(other: Vector3D) : Double = {
+    val a = (this∙other)/(this.norm*other.norm)
+    Math.acos(Math.min(Math.max(a, -1.0), 1.0))
+  }
 }
 
 object Vector3D {
