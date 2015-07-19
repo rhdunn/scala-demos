@@ -32,5 +32,7 @@ class Vector3D(a: Double, b: Double, c: Double) {
 
   def !=(other: Vector3D) = !(this == other)
 
+  def unary_-() = new Vector3D(-x, -y, -z)
+
   def norm = Math.sqrt(x*x + y*y + z*z)
 }

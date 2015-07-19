@@ -63,6 +63,11 @@ class Vector3DSpec extends FlatSpec {
     assert(new Vector3D(1.0, 2.0, 3.0) != new Vector3D(4.0, 2.0, 3.0))
   }
 
+  "unary negation" should "return the opposite vector" in {
+    assert(-new Vector3D( 4,      5,    6) == new Vector3D(-4,   -5,   -6))
+    assert(-new Vector3D(-9.1, -6.2, -3.3) == new Vector3D( 9.1,  6.2,  3.3))
+  }
+
   "norm" should "calculate the magnitude of the vector" in {
     approx(new Vector3D( 3.0,  4.0,  5.0).norm, 7.0710678118654755)
     approx(new Vector3D(-3.0,  4.0,  5.0).norm, 7.0710678118654755)
