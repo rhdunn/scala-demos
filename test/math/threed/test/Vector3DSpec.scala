@@ -70,6 +70,14 @@ class Vector3DSpec extends FlatSpec {
     assert(-new Vector3D(-9.1, -6.2, -3.3) == new Vector3D( 9.1,  6.2,  3.3))
   }
 
+  "vector addition" should "add the elements in the vector" in {
+    assert(new Vector3D(4, 5, 6) + new Vector3D( 1,  2,  3) == new Vector3D(5, 7, 9))
+    assert(new Vector3D(3, 6, 9) + new Vector3D(-3, -6, -9) == new Vector3D())
+
+    val v = new Vector3D(2, 4, 8)
+    assert(v + v == new Vector3D(4, 8, 16))
+  }
+
   "norm" should "calculate the magnitude of the vector" in {
     approx(new Vector3D( 3.0,  4.0,  5.0).norm, 7.0710678118654755)
     approx(new Vector3D(-3.0,  4.0,  5.0).norm, 7.0710678118654755)
