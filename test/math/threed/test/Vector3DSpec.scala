@@ -109,4 +109,11 @@ class Vector3DSpec extends FlatSpec {
     approx(u.z, 0.8017837257372732)
     assert(u.norm == 1.0)
   }
+
+  "dot product" should "be the scalar product of two vectors" in {
+    val a = new Vector3D(2, 3, 4)
+    val b = new Vector3D(3, 6, 9)
+    assert(a∙b == 60)
+    assert(b∙a == 60)
+  }
 }

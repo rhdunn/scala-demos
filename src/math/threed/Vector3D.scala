@@ -47,6 +47,10 @@ class Vector3D(a: Double, b: Double, c: Double) {
   def norm = Math.sqrt(x*x + y*y + z*z)
 
   def unit = this/norm
+
+  // dot product
+  def ∙(other: Vector3D) =
+    this.x*other.x + this.y*other.y + this.z*other.z
 }
 
 object Vector3D {
