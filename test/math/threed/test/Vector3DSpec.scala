@@ -52,6 +52,17 @@ class Vector3DSpec extends FlatSpec {
     assert(!(new Vector3D(1.0, 2.0, 3.0) == new Vector3D(4.0, 2.0, 3.0)))
   }
 
+  "Vector inequality" should "not match identical vectors" in {
+    assert(!(new Vector3D(1.0, 2.0, 3.0) != new Vector3D(1.0, 2.0, 3.0)))
+    assert(!(new Vector3D(8.3, 4.6, 2.9) != new Vector3D(8.3, 4.6, 2.9)))
+  }
+
+  "Vector inequality" should "match different vectors" in {
+    assert(new Vector3D(1.0, 2.0, 3.0) != new Vector3D(1.0, 2.0, 4.0))
+    assert(new Vector3D(1.0, 2.0, 3.0) != new Vector3D(1.0, 4.0, 3.0))
+    assert(new Vector3D(1.0, 2.0, 3.0) != new Vector3D(4.0, 2.0, 3.0))
+  }
+
   "norm" should "calculate the magnitude of the vector" in {
     approx(new Vector3D( 3.0,  4.0,  5.0).norm, 7.0710678118654755)
     approx(new Vector3D(-3.0,  4.0,  5.0).norm, 7.0710678118654755)
