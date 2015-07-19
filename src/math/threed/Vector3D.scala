@@ -37,5 +37,8 @@ class Vector3D(a: Double, b: Double, c: Double) {
   def +(other: Vector3D) =
     new Vector3D(this.x + other.x, this.y + other.y, this.z + other.z)
 
+  def -(other: Vector3D) =
+    new Vector3D(this.x - other.x, this.y - other.y, this.z - other.z)
+
   def norm = Math.sqrt(x*x + y*y + z*z)
 }
