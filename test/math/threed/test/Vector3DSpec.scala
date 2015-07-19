@@ -23,6 +23,7 @@ package math.threed.test
 import math.threed._
 import org.scalatest._
 
+// noinspection DoubleNegation
 class Vector3DSpec extends FlatSpec {
   def approx(a: Double, b: Double, precision: Double = 0.000000000000001) =
     assert((a - b).abs < precision, "for " + a + " approx " + b)
@@ -53,6 +54,7 @@ class Vector3DSpec extends FlatSpec {
   }
 
   "Vector inequality" should "not match identical vectors" in {
+    // DoubleNegation needed to test != behaviour.
     assert(!(new Vector3D(1.0, 2.0, 3.0) != new Vector3D(1.0, 2.0, 3.0)))
     assert(!(new Vector3D(8.3, 4.6, 2.9) != new Vector3D(8.3, 4.6, 2.9)))
   }
