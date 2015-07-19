@@ -42,6 +42,8 @@ class Vector3D(a: Double, b: Double, c: Double) {
 
   def *(s: Double) = new Vector3D(x*s, y*s, z*s)
 
+  def /(s: Double) = new Vector3D(x/s, y/s, z/s)
+
   def norm = Math.sqrt(x*x + y*y + z*z)
 }
 
