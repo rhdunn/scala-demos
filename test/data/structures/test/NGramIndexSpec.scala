@@ -80,4 +80,76 @@ class NGramIndexSpec extends FlatSpec {
     assert(c.ngrams.get("wer").contains(mutable.Set(3)))
     assert(c.ngrams.get("yes").contains(mutable.Set(4)))
   }
+
+  "get" should "return `any` for keys smaller than the n-gram arity" in {
+    val c = new NGramIndex[Int](3)
+    c put "hello" -> 1
+    c put "mellow" -> 2
+    c put "lower" -> 3
+    c put "yes" -> 4
+
+    assert(c.get("") == mutable.Set(1, 2, 3, 4))
+    assert(c.any == mutable.Set(1, 2, 3, 4))
+
+    assert(c.get("a") == mutable.Set(1, 2, 3, 4))
+    assert(c.any == mutable.Set(1, 2, 3, 4))
+
+    assert(c.get("hi") == mutable.Set(1, 2, 3, 4))
+    assert(c.any == mutable.Set(1, 2, 3, 4))
+  }
+
+  "get" should "return the values matching the n-gram" in {
+    val c = new NGramIndex[Int](3)
+    c put "hello" -> 1
+    c put "mellow" -> 2
+    c put "lower" -> 3
+    c put "yes" -> 4
+
+    assert(c.get("ell") == mutable.Set(1, 2))
+    assert(c.any == mutable.Set(1, 2, 3, 4))
+  }
+
+  "get" should "return the intersected n-gram values when the n-grams have the same values" in {
+    val c = new NGramIndex[Int](3)
+    c put "hello" -> 1
+    c put "mellow" -> 2
+    c put "lower" -> 3
+    c put "yes" -> 4
+
+    assert(c.get("ello") == mutable.Set(1, 2))
+    assert(c.any == mutable.Set(1, 2, 3, 4))
+  }
+
+  "get" should "return the intersected n-gram values when the n-grams have different values" in {
+    val c = new NGramIndex[Int](3)
+    c put "hello" -> 1
+    c put "mellow" -> 2
+    c put "lower" -> 3
+    c put "yes" -> 4
+
+    assert(c.get("ellow") == mutable.Set(2))
+    assert(c.any == mutable.Set(1, 2, 3, 4))
+  }
+
+  "get" should "return an empty set when the n-grams don't have common values" in {
+    val c = new NGramIndex[Int](3)
+    c put "hello" -> 1
+    c put "mellow" -> 2
+    c put "lower" -> 3
+    c put "yes" -> 4
+
+    assert(c.get("ellower").isEmpty)
+    assert(c.any == mutable.Set(1, 2, 3, 4))
+  }
+
+  "get" should "return an empty set when there is a missing n-gram" in {
+    val c = new NGramIndex[Int](3)
+    c put "hello" -> 1
+    c put "mellow" -> 2
+    c put "lower" -> 3
+    c put "yes" -> 4
+
+    assert(c.get("ellows").isEmpty)
+    assert(c.any == mutable.Set(1, 2, 3, 4))
+  }
 }

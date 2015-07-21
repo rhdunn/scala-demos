@@ -38,6 +38,17 @@ class NGramIndex[T](arity: Int) {
       data put ngram -> item._2
     })
   }
+
+  def get(item: String): mutable.Set[T] = {
+    var ret = any
+    NGrammer.ngrams(item, arity).foreach(ngram => {
+      data.get(ngram) match {
+        case Some(x) => ret = ret intersect x
+        case None    => ret = ret.empty
+      }
+    })
+    ret
+  }
 }
 
 /** References:
