@@ -25,4 +25,9 @@ object NGrammer {
     if (items.size < arity) return Iterator.empty
     items.sliding(arity)
   }
+
+  def ngrams(items: String, arity: Int): Iterator[String] = {
+    if (items.length < arity) return Iterator.empty
+    items.sliding(arity).map(x => x.mkString(""))
+  }
 }
