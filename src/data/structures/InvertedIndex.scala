@@ -27,7 +27,7 @@ class InvertedIndex[KeyT, T] {
 
   def isEmpty = data.isEmpty
 
-  def notEmpty = data.nonEmpty
+  def nonEmpty = data.nonEmpty
 
   def size = data.size
 

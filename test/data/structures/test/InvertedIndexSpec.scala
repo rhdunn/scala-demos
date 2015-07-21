@@ -28,7 +28,7 @@ class InvertedIndexSpec extends FlatSpec {
   "Initialization" should "create an empty collection" in {
     val c = new InvertedIndex[String, Int]()
     assert(c.isEmpty)
-    assert(!c.notEmpty)
+    assert(!c.nonEmpty)
     assert(c.size == 0)
   }
 
@@ -37,7 +37,7 @@ class InvertedIndexSpec extends FlatSpec {
     c put "hello" -> 2
 
     assert(!c.isEmpty)
-    assert(c.notEmpty)
+    assert(c.nonEmpty)
     assert(c.size == 1)
 
     assert(c.get("hello").contains(mutable.Set(2)))
