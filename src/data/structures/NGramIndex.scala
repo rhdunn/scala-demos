@@ -20,8 +20,11 @@
 
 package data.structures
 
+import scala.collection.mutable
+
 class NGramIndex[T](arity: Int) {
   private val data = new InvertedIndex[String, T]()
+  val any = mutable.Set[T]()
 
   def isEmpty = data.isEmpty
 
@@ -30,6 +33,7 @@ class NGramIndex[T](arity: Int) {
   def ngrams = data
 
   def put(item: (String, T)) = {
+    any += item._2
     NGrammer.ngrams(item._1, arity).foreach(ngram => {
       data put ngram -> item._2
     })

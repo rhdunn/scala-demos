@@ -31,8 +31,7 @@ class NGramIndexSpec extends FlatSpec {
     assert(c.isEmpty)
     assert(!c.nonEmpty)
     assert(c.ngrams.isEmpty)
-    assert(!c.ngrams.nonEmpty)
-    assert(c.ngrams.size == 0)
+    assert(c.any.isEmpty)
   }
 
   "put" should "not add n-grams for keys below the n-gram arity" in {
@@ -42,8 +41,8 @@ class NGramIndexSpec extends FlatSpec {
     assert(c.isEmpty)
     assert(!c.nonEmpty)
     assert(c.ngrams.isEmpty)
-    assert(!c.ngrams.nonEmpty)
-    assert(c.ngrams.size == 0)
+
+    assert(c.any == mutable.Set(1))
   }
 
   "put" should "build n-grams for the given key" in {
@@ -53,7 +52,8 @@ class NGramIndexSpec extends FlatSpec {
     assert(!c.isEmpty)
     assert(c.nonEmpty)
     assert(!c.ngrams.isEmpty)
-    assert(c.ngrams.nonEmpty)
+
+    assert(c.any == mutable.Set(1))
 
     assert(c.ngrams.size == 3)
     assert(c.ngrams.get("hel").contains(mutable.Set(1)))
@@ -67,6 +67,8 @@ class NGramIndexSpec extends FlatSpec {
     c put "mellow" -> 2
     c put "lower" -> 3
     c put "yes" -> 4
+
+    assert(c.any == mutable.Set(1, 2, 3, 4))
 
     assert(c.ngrams.size == 8)
     assert(c.ngrams.get("hel").contains(mutable.Set(1)))
