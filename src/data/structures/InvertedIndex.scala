@@ -23,7 +23,7 @@ package data.structures
 import scala.collection.mutable
 
 class InvertedIndex[KeyT, T] {
-  private val data = mutable.Map[KeyT, List[T]]()
+  private val data = mutable.Map[KeyT, mutable.Set[T]]()
 
   def isEmpty = data.isEmpty
 
@@ -33,12 +33,12 @@ class InvertedIndex[KeyT, T] {
 
   def put(item: (KeyT, T)) = {
     data.get(item._1) match {
-      case Some(x) => data put(item._1, x :+ item._2)
-      case None    => data put(item._1, List(item._2))
+      case Some(x) => data put(item._1, x + item._2)
+      case None    => data put(item._1, mutable.Set(item._2))
     }
   }
 
-  def get(item: KeyT): Option[List[T]] = data get item
+  def get(item: KeyT): Option[mutable.Set[T]] = data get item
 }
 
 /** References:

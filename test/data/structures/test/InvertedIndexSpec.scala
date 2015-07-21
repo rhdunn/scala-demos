@@ -22,6 +22,7 @@ package data.structures.test
 
 import data.structures._
 import org.scalatest._
+import scala.collection.mutable
 
 class InvertedIndexSpec extends FlatSpec {
   "Initialization" should "create an empty collection" in {
@@ -39,7 +40,7 @@ class InvertedIndexSpec extends FlatSpec {
     assert(c.notEmpty)
     assert(c.size == 1)
 
-    assert(c.get("hello").contains(List(2)))
+    assert(c.get("hello").contains(mutable.Set(2)))
   }
 
   "Adding to an existing item" should "append the item" in {
@@ -47,7 +48,15 @@ class InvertedIndexSpec extends FlatSpec {
     c put "hello" -> 2
     c put "hello" -> 5
 
-    assert(c.get("hello").contains(List(2, 5)))
+    assert(c.get("hello").contains(mutable.Set(2, 5)))
+  }
+
+  "Adding to an existing item" should "avoid duplicate values" in {
+    val c = new InvertedIndex[String, Int]()
+    c put "hello" -> 2
+    c put "hello" -> 2
+
+    assert(c.get("hello").contains(mutable.Set(2)))
   }
 
   "Adding multiple items" should "add those items to the collection" in {
@@ -55,8 +64,8 @@ class InvertedIndexSpec extends FlatSpec {
     c put "hello" -> 2
     c put "there" -> 5
 
-    assert(c.get("hello").contains(List(2)))
-    assert(c.get("there").contains(List(5)))
+    assert(c.get("hello").contains(mutable.Set(2)))
+    assert(c.get("there").contains(mutable.Set(5)))
   }
 
   "Getting a non-existent item" should "return an empty option" in {
