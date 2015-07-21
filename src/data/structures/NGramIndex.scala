@@ -20,14 +20,20 @@
 
 package data.structures
 
-class NGramIndex[T] {
+class NGramIndex[T](arity: Int) {
   private val data = new InvertedIndex[String, T]()
 
   def isEmpty = data.isEmpty
 
   def nonEmpty = data.nonEmpty
 
-  def size = data.size
+  def ngrams = data
+
+  def put(item: (String, T)) = {
+    NGrammer.ngrams(item._1, arity).foreach(ngram => {
+      data put ngram -> item._2
+    })
+  }
 }
 
 /** References:
