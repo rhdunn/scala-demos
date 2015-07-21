@@ -20,12 +20,25 @@
 
 package data.structures
 
+import scala.collection.mutable
+
 class InvertedIndex[KeyT, T] {
-  def isEmpty = true
+  private val data = mutable.Map[KeyT, List[T]]()
 
-  def notEmpty = false
+  def isEmpty = data.isEmpty
 
-  def size = 0
+  def notEmpty = data.nonEmpty
+
+  def size = data.size
+
+  def put(item: (KeyT, T)) = {
+    data.get(item._1) match {
+      case Some(x) => data put(item._1, x :+ item._2)
+      case None    => data put(item._1, List(item._2))
+    }
+  }
+
+  def get(item: KeyT): Option[List[T]] = data get item
 }
 
 /** References:
